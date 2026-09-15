@@ -20,5 +20,5 @@ int main() {
     printf("Expenses: %.2f\n", expenses);
     printf("Budget: %.2f\n", budget);
     printf("------------------------\n");
-
+return 0;
 }
