@@ -1,0 +1,10 @@
+# Compiled binaries
+*.exe
+*.out
+
+# IDE / editor clutter
+.idea/
+.vscode/
+
+# macOS
+.DS_Store
