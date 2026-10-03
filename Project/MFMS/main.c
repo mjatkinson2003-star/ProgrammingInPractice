@@ -1,5 +1,6 @@
 #include <stdio.h>
 # include "utilities.h"
+# include "employees.h"
 void displayMainMenu(void);
 
 int main(void)
@@ -8,12 +9,12 @@ int main(void)
 
     do {
         displayMainMenu();
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
+        choice = readInt("Enter your choice: ", 1, 6);
 
         switch (choice) {
           case 1:
                 printf("\nEmployee Management selected\n");
+                employeeMenu();
                 break;
             case 2:
                 printf("\nBudget Management selected\n");
