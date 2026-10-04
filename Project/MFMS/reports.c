@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <string.h>
 #include "employees.h"
+#include "assets.h"
+#include "reports.h"
+
+void displayAssets(void);
 
 //interal variables
 int reportChoice;
@@ -27,7 +31,7 @@ int employeeReport(){
         }
     }
     printf("Highest salary: N$ %.2f\n", highestSalary);
-//lowest salary calculation and siplay
+//lowest salary calculation and display
     double lowestSalary = calculateSalary(
         empBasic[0], empHousing[0], empTransport[0]
     );
@@ -47,6 +51,8 @@ int employeeReport(){
 //start of budget report
 int budgetReport(){
     printf("Budget report generated.\n");
+
+
     return 0;
 }
 //start of supplier report
@@ -56,7 +62,10 @@ int supplierReport(){
 }
 //start of asset report
 int assetReport(){
-    printf("Asset report generated.\n");
+    printf("Asset report generating....\n");
+    printf("Total assets: %d\n", assetCount);
+    printf("Asset list:\n");
+    displayAssets(); //display all assets in the table
     return 0;
 }
 

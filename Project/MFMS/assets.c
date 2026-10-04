@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
- 
+ #include "assets.h"
 #define MAX_ASSETS 999
  
 typedef struct{

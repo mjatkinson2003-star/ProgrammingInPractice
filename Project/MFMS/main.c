@@ -2,6 +2,7 @@
 # include "utilities.h"
 # include "employees.h"
 #include "reports.h"
+#include "assets.h"
 void displayMainMenu(void);
 
 int main(void)
@@ -25,6 +26,7 @@ int main(void)
                 break;
             case 4:
                 printf("\nAsset Management selected\n");
+                assets();
                 break;
             case 5:
                 printf("\nReports selected\n");
