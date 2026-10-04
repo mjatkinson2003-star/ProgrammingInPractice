@@ -5,8 +5,10 @@
 #include "reports.h"
 #include "utilities.h"
 #include "budget.h"
+#include "suppliers.h"
 
 void displayAssets(void);
+void displaySuppliers(void);
 
 //interal variables
 int reportChoice;
@@ -95,9 +97,11 @@ void budgetReport(void)
     }
 }
 //start of supplier report
-int supplierReport(){
-    printf("Supplier report generated.\n");
-    return 0;
+void supplierReport(void)
+{
+    printf("\n--- SUPPLIER REPORT ---\n");
+    printf("Total Suppliers : %d\n", getSupplierCount());
+    displaySuppliers();
 }
 //start of asset report
 int assetReport(){

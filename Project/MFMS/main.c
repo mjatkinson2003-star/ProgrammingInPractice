@@ -4,6 +4,7 @@
 #include "reports.h"
 #include "assets.h"
 #include "budget.h"
+#include "suppliers.h"
 void displayMainMenu(void);
 
 int main(void)
@@ -25,6 +26,7 @@ int main(void)
                 break;
             case 3:
                 printf("\nSupplier Management selected\n");
+                supplierMenu();
                 break;
             case 4:
                 printf("\nAsset Management selected\n");
