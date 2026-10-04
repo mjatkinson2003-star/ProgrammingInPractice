@@ -1,6 +1,7 @@
 #include <stdio.h>
 # include "utilities.h"
 # include "employees.h"
+#include "reports.h"
 void displayMainMenu(void);
 
 int main(void)
@@ -27,6 +28,7 @@ int main(void)
                 break;
             case 5:
                 printf("\nReports selected\n");
+                reports();
                 break;
             case 6:
                 printf("\nExiting MFMS. Goodbye!\n");
