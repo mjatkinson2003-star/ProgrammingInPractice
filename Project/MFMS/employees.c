@@ -67,6 +67,7 @@ void employeeMenu(void) {
 
 void addEmployee(void) 
 {
+    int id;
     if(employeeCount >= MAX_EMPLOYEES){
         printf("\n Employee limit reached. Cannot add more employees.\n");
         return;
@@ -74,7 +75,14 @@ void addEmployee(void)
 
     printf("\n--- Add Employee ---\n");
 
-    empID[employeeCount] = readInt("Employee ID: ", 1, 99999);
+  do {
+    id = readInt("Employee ID: ", 1, 99999);
+
+    if (findEmployeeByID(id) != -1) {
+        printf("  An employee with ID %d already exists. Please use a different ID.\n", id);
+    }
+    } while (findEmployeeByID(id) != -1);
+    empID[employeeCount] = id;
     readText("Full name: ", empName[employeeCount], NAME_LENGTH);
     readText("Department: ", empDepartment[employeeCount], DEPARTMENT_LENGTH);
     empBasic[employeeCount] = readDouble("Basic salary (N$): ", 0);
@@ -130,7 +138,7 @@ void searchEmployee(void)
         if (index == -1) {
             printf("\nNo employee found with ID %d.\n", id);
         } else {
-            displayEmployeeDetails(index);
+            displayEmployeeInformation(index);
         }
     } else{
     char searchName[NAME_LENGTH];
@@ -140,7 +148,7 @@ void searchEmployee(void)
 
         for (int i = 0; i < employeeCount; i++) {
             if (strcmp(empName[i], searchName) == 0) {
-                displayEmployeeDetails(i);
+                displayEmployeeInformation(i);
                 found = 1;
             }
         }
@@ -181,12 +189,12 @@ void salaryInformation(void)
     net = gross - tax;
 
     printf("\n--- Salary Information: %s  ---\n", empName[index]);
-    printf("Basic Salary:            : N$%12.2f\n", empBasic[index]);
-    printf("Housing Allowance:       : N$%12.2f\n", empHousing[index]);
-    printf("Transport Allowance:     : N$%12.2f\n", empTransport[index]);
-    printf("Gross Salary:            : N$%12.2f\n", gross);
-    printf("Tax:                     : N$%12.2f\n", tax);
-    printf("Net Salary:              : N$%12.2f\n", net);
+    printf("Basic Salary            : N$%12.2f\n", empBasic[index]);
+    printf("Housing Allowance       : N$%12.2f\n", empHousing[index]);
+    printf("Transport Allowance     : N$%12.2f\n", empTransport[index]);
+    printf("Gross Salary            : N$%12.2f\n", gross);
+    printf("Tax                     : N$%12.2f\n", tax);
+    printf("Net Salary              : N$%12.2f\n", net);
 
     if (net>= 20000){
         printf("Income Class               : High Income\n");
@@ -198,7 +206,7 @@ void salaryInformation(void)
 
 //display one employee details function
 
-void displayEmployeeDetails(int index)
+void displayEmployeeInformation(int index)
 {
     double gross = calculateSalary(empBasic[index], empHousing[index], empTransport[index]);
 
