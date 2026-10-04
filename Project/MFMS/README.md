@@ -41,13 +41,16 @@ A municipality has to keep track of its employees and their salaries, the budget
 - Validates email addresses and telephone numbers
 
 ### Asset Management
-- [Partner to fill in]
+-Add assets (ID,Name,Type,purchaseValue,department,condition)
+-Display all assets
+-Search for asset by ID
+-Validate ID(no duplicate ID's )
 
 ### Reports
 - Employee report: total employees, total, average, highest and lowest salary
 - Budget report: total allocated, total expenditure, remaining budget, departments over budget
 - Supplier report: all registered suppliers
-- Asset report: [partner to fill in]
+- Asset report: Display all registered assets
 
 ### Input Validation
 - Invalid menu choices are rejected
@@ -59,23 +62,23 @@ A municipality has to keep track of its employees and their salaries, the budget
 
 | File | Purpose |
 |------|---------|
-| `main.c` | Main menu and program flow |
-| `utilities.c / .h` | Shared input and validation functions (`readText`, `readInt`, `readDouble`) |
-| `employees.c / .h` | Employee Management module |
-| `budget.c / .h` | Budget Management module |
-| `suppliers.c / .h` | Supplier Management module |
-| `assets.c / .h` | Asset Management module |
-| `reports.c / .h` | Reports module |
+| main.c | Main menu and program flow |
+| utilities.c / .h | Shared input and validation functions (`readText`, `readInt`, `readDouble`) |
+| employees.c / .h | Employee Management module |
+| budget.c / .h | Budget Management module |
+| suppliers.c / .h | Supplier Management module |
+| assets.c / .h | Asset Management module |
+| reports.c / .h | Reports module |
 
 ## Compilation Instructions
 
 Requires the GCC compiler.
 
-From inside the `MFMS` folder, run:
+From inside the MFMS folder, run:
 
-```
+
 gcc -std=c99 -Wall main.c utilities.c employees.c budget.c suppliers.c assets.c reports.c -o mfms
-```
+
 
 ## How to Run
 
@@ -102,6 +105,6 @@ Use the number keys to choose menu options and press Enter.
 
 ## Known Limitations
 
-- Data is stored in memory only and is lost when the program closes (file storage planned for Project B).
+- Data is stored in memory only and is lost when the program closes.
 - Name and town searches are case-sensitive and require an exact match.
 - Tax rates are simplified values chosen by the group, not official Namibian PAYE tables.
