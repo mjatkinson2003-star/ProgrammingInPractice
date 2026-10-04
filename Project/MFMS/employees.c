@@ -249,3 +249,17 @@ double calculateTax(double grossSalary)
         return grossSalary * 0.25; 
     }
 }
+
+// how many employees (report use)
+int getEmployeeCount(void)
+{
+    return employeeCount;
+}
+
+// get gross salary (report use)
+double getEmployeeGrossSalary(int index){
+    if (index < 0 || index >= employeeCount) {
+        return 0; // Invalid index
+    }
+    return calculateSalary(empBasic[index], empHousing[index], empTransport[index]);
+}

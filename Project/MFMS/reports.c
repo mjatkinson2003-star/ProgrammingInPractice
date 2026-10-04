@@ -3,6 +3,7 @@
 #include "employees.h"
 #include "assets.h"
 #include "reports.h"
+#include "utilities.h"
 
 void displayAssets(void);
 
@@ -11,42 +12,41 @@ int reportChoice;
 
 //start of employee report
 //total employee display
-int employeeReport(){
-    printf("Generating employee report...\n");
-      if (employeeCount == 0) {
-        printf("\nNo employees have been added yet.\n");
-        return 0;
+void employeeReport(void)
+{
+    int count = getEmployeeCount();
+    double total = 0;
+    double highestSalary;
+    double lowestSalary;
+
+    printf("\n--- EMPLOYEE REPORT ---\n");
+
+    if (count == 0) {
+        printf("No employees have been added yet.\n");
+        return;
     }
-    printf("\nTotal employees: %d\n",employeeCount);
-//highest salary calculation and display
-    double highestSalary = calculateSalary(
-        empBasic[0], empHousing[0], empTransport[0]
-    );
-    for (int i = 1; i < employeeCount; i++) {
-        double salary = calculateSalary(
-            empBasic[i], empHousing[i], empTransport[i]
-        );
+
+    highestSalary = getEmployeeGrossSalary(0);
+    lowestSalary = getEmployeeGrossSalary(0);
+
+    for (int i = 0; i < count; i++) {
+        double salary = getEmployeeGrossSalary(i);
+
+        total = total + salary;
+
         if (salary > highestSalary) {
             highestSalary = salary;
         }
-    }
-    printf("Highest salary: N$ %.2f\n", highestSalary);
-//lowest salary calculation and display
-    double lowestSalary = calculateSalary(
-        empBasic[0], empHousing[0], empTransport[0]
-    );
-    for (int i = 1; i < employeeCount; i++) {
-        double salary = calculateSalary(
-            empBasic[i], empHousing[i], empTransport[i]
-        );
         if (salary < lowestSalary) {
             lowestSalary = salary;
         }
     }
-    printf("Lowest salary: N$ %.2f\n", lowestSalary);
 
-
-    return 0;
+    printf("Total Employees : %d\n", count);
+    printf("Total Salaries  : N$%.2f\n", total);
+    printf("Average Salary  : N$%.2f\n", total / count);
+    printf("Highest Salary  : N$%.2f\n", highestSalary);
+    printf("Lowest Salary   : N$%.2f\n", lowestSalary);
 }
 //start of budget report
 int budgetReport(){
