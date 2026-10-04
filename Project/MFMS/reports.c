@@ -4,6 +4,7 @@
 #include "assets.h"
 #include "reports.h"
 #include "utilities.h"
+#include "budget.h"
 
 void displayAssets(void);
 
@@ -49,11 +50,49 @@ void employeeReport(void)
     printf("Lowest Salary   : N$%.2f\n", lowestSalary);
 }
 //start of budget report
-int budgetReport(){
-    printf("Budget report generated.\n");
+void budgetReport(void)
+{
+    int count = getDepartmentCount();
+    double totalAllocated = 0;
+    double totalSpent = 0;
+    int overCount = 0;
+    char name[DEPT_NAME_LENGTH];
 
+    printf("\n--- BUDGET REPORT ---\n");
 
-    return 0;
+    if (count == 0) {
+        printf("No departments have been added yet.\n");
+        return;
+    }
+
+    // Add up the totals for all departments
+    for (int i = 0; i < count; i++) {
+        totalAllocated = totalAllocated + getDepartmentAllocated(i);
+        totalSpent = totalSpent + getDepartmentSpent(i);
+    }
+
+    printf("Total Departments       : %d\n", count);
+    printf("Total Allocated Budget  : N$%.2f\n", totalAllocated);
+    printf("Total Expenditure       : N$%.2f\n", totalSpent);
+    printf("Remaining Budget        : N$%.2f\n", totalAllocated - totalSpent);
+
+    // List of exceeded departments
+    printf("\nDepartments Exceeding Budget:\n");
+
+    for (int i = 0; i < count; i++) {
+        double allocated = getDepartmentAllocated(i);
+        double spent = getDepartmentSpent(i);
+
+        if (spent > allocated) {
+            getDepartmentName(i, name);
+            printf("  %-20s over by N$%.2f\n", name, spent - allocated);
+            overCount++;
+        }
+    }
+
+    if (overCount == 0) {
+        printf("  None - all departments are within budget.\n");
+    }
 }
 //start of supplier report
 int supplierReport(){
