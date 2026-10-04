@@ -21,7 +21,12 @@ int employeeCount = 0; // Current employee count
 
 void addEmployee(void);
 void displayEmployees(void);
+void searchEmployee(void);
+void salaryInformation(void);
+void displayEmployeeInformation(int index);
+int findEmployeeByID(int id);
 double calculateSalary(double basic, double housing, double transport);
+double calculateTax(double grossSalary);
 
 // Employee menu
 
@@ -32,8 +37,10 @@ void employeeMenu(void) {
         printf("\n---------------EMPLOYEE MANAGEMENT--------------\n");
         printf("1. Add Employee\n");
         printf("2. Display Employees\n");
-        printf("3. Exit\n");
-        choice = readInt("Enter your choice: ", 1, 3);
+        printf("3. Search Employee\n");
+        printf("4. Salary Information\n");
+        printf("5. Back to Main Menu\n");
+        choice = readInt("Enter your choice: ", 1, 5);
 
         switch(choice) {
             case 1:
@@ -43,10 +50,16 @@ void employeeMenu(void) {
                 displayEmployees();
                 break;
             case 3:
+                searchEmployee();
+                break;
+            case 4:
+                salaryInformation();
+                break;
+            case 5:
                 break;
             
         }
-    }while(choice != 3);
+    }while(choice != 5);
 }
 
 
@@ -92,6 +105,109 @@ void displayEmployees(void)
                empID[i], empName[i], empDepartment[i], gross);
     }
 }
+
+// search employee by ID
+
+void searchEmployee(void)
+{
+    int option;
+
+    if (employeeCount == 0) {
+        printf("\nNo employees have been added yet.\n");
+        return;
+    }
+
+    printf("\n--- Search Employee ---\n");
+    printf("1. Search by ID\n");
+    printf("2. Search by Name\n");
+    option = readInt("Enter your choice: ", 1, 2);
+
+
+    if (option == 1) {
+        int id = readInt("Enter Employee ID: ", 1, 99999);
+        int index = findEmployeeByID(id);
+
+        if (index == -1) {
+            printf("\nNo employee found with ID %d.\n", id);
+        } else {
+            displayEmployeeDetails(index);
+        }
+    } else{
+    char searchName[NAME_LENGTH];
+        int found = 0;   /* 0 = no match yet, 1 = at least one match */
+
+        readText("Enter full name: ", searchName, NAME_LENGTH);
+
+        for (int i = 0; i < employeeCount; i++) {
+            if (strcmp(empName[i], searchName) == 0) {
+                displayEmployeeDetails(i);
+                found = 1;
+            }
+        }
+
+        if (found == 0) {
+            printf("\nNo employee found with the name \"%s\".\n", searchName);
+        }
+    }
+}
+
+
+
+// salary information function (for one employee)
+
+void salaryInformation(void)
+{
+    int id;
+    int index;
+    double gross;
+    double tax;
+    double net;
+
+    if (employeeCount == 0) {
+        printf("\nNo employees have been added yet.\n");
+        return;
+    }
+
+    id = readInt("\nEnter Employee ID: ", 1, 99999);
+    index = findEmployeeByID(id);
+
+    if (index == -1) {
+        printf("\nNo employee found with ID %d.\n", id);
+        return;
+    } 
+
+    gross = calculateSalary(empBasic[index], empHousing[index], empTransport[index]);
+    tax = calculateTax(gross);
+    net = gross - tax;
+
+    printf("\n--- Salary Information: %s  ---\n", empName[index]);
+    printf("Basic Salary:            : N$%12.2f\n", empBasic[index]);
+    printf("Housing Allowance:       : N$%12.2f\n", empHousing[index]);
+    printf("Transport Allowance:     : N$%12.2f\n", empTransport[index]);
+    printf("Gross Salary:            : N$%12.2f\n", gross);
+    printf("Tax:                     : N$%12.2f\n", tax);
+    printf("Net Salary:              : N$%12.2f\n", net);
+
+    if (net>= 20000){
+        printf("Income Class               : High Income\n");
+    } else{
+        printf("Income Class               : Standard Income\n");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // calculate salary function
 
