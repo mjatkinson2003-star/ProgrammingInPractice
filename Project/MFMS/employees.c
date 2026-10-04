@@ -196,22 +196,48 @@ void salaryInformation(void)
 }
 
 
+//display one employee details function
+
+void displayEmployeeDetails(int index)
+{
+    double gross = calculateSalary(empBasic[index], empHousing[index], empTransport[index]);
+
+    printf("\n--- Employee Found ---\n");
+    printf("Employee ID  : %d\n", empID[index]);
+    printf("Name         : %s\n", empName[index]);
+    printf("Department   : %s\n", empDepartment[index]);
+    printf("Gross Salary : N$%.2f\n", gross);
+}
 
 
+//find employee by ID function
 
-
-
-
-
-
-
-
-
-
+int findEmployeeByID(int id)
+{
+    for (int i = 0; i < employeeCount; i++) {
+        if (empID[i] == id) {
+            return i;
+        }
+    }
+    return -1;
+}
 
 // calculate salary function
 
 double calculateSalary(double basic, double housing, double transport)
 {
     return basic + housing + transport;
+}
+
+// calculate tax function
+
+double calculateTax(double grossSalary)
+{
+    if (grossSalary <= 10000) {
+        return 0; 
+    } else if (grossSalary <= 25000) {
+        return grossSalary * 0.18; 
+    } else {
+        return grossSalary * 0.25; 
+    }
 }
