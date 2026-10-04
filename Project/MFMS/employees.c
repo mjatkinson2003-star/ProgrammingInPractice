@@ -114,7 +114,7 @@ void displayEmployees(void)
     }
 }
 
-// search employee by ID
+// search employee
 
 void searchEmployee(void)
 {
@@ -130,7 +130,7 @@ void searchEmployee(void)
     printf("2. Search by Name\n");
     option = readInt("Enter your choice: ", 1, 2);
 
-
+    // ID search
     if (option == 1) {
         int id = readInt("Enter Employee ID: ", 1, 99999);
         int index = findEmployeeByID(id);
@@ -141,6 +141,7 @@ void searchEmployee(void)
             displayEmployeeInformation(index);
         }
     } else{
+    // Name search
     char searchName[NAME_LENGTH];
         int found = 0;   /* 0 = no match yet, 1 = at least one match */
 

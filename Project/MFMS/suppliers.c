@@ -125,7 +125,7 @@ void displaySuppliers(void)
     }
 }
 
-// Search supplier function (by ID, name or town)
+// Search supplier function
 
 void searchSupplier(void)
 {
@@ -141,7 +141,7 @@ void searchSupplier(void)
     printf("2. Search by Name\n");
     printf("3. Search by Town\n");
     option = readInt("Enter your choice: ", 1, 3);
-
+    //ID
     if (option == 1) {
         int id = readInt("Enter Supplier ID: ", 1, 99999);
         int index = findSupplierByID(id);
@@ -151,6 +151,7 @@ void searchSupplier(void)
         } else {
             displaySupplierInformation(index);
         }
+    //NAME
     } else if (option == 2) {
         char searchName[SUP_NAME_LENGTH];
         int found = 0;   // 0 = no match, 1 = at least one match
@@ -192,7 +193,7 @@ void displaySupplierInformation(int index)
 {
     char description[150];
 
-    // Build a sentence such as "ABC Office Supplies operates in Windhoek."
+    // Builds a description
     strcpy(description, supName[index]);
     strcat(description, " operates in ");
     strcat(description, supTown[index]);
@@ -220,7 +221,7 @@ int findSupplierByID(int id)
 }
 
 // Email check function (returns 1 if valid, 0 if not)
-// Simple rule: exactly one '@', not at the start, and at least one '.'
+// Rule: exactly one '@', not at the start, and at least one '.'
 
 int isValidEmail(char email[])
 {
